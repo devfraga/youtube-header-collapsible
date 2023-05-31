@@ -1,7 +1,7 @@
-import { View, StatusBar, Text, FlatList, StyleSheet, Animated, Image } from "react-native";
-import { useRef } from 'react'
+import { View, StatusBar, Text, FlatList, StyleSheet, Animated, Image, SafeAreaView } from "react-native";
+import { useEffect, useRef } from 'react'
 
-const H_MAX_HEGIHT = 150;
+const H_MAX_HEIGHT = 150;
 const H_MIN_HEIGHT = 50;
 const H_SCROLL_DISTANCE = H_MAX_HEGIHT - H_MIN_HEIGHT;
 
@@ -14,13 +14,13 @@ const App = () => {
   ];
 
   const scrollOffsetY = useRef(new Animated.Value(0)).current;
-
+  
   const headerScrollHeight = scrollOffsetY.interpolate({
     inputRange: [0, H_SCROLL_DISTANCE],
-    outputRange: [H_MAX_HEGIHT, H_MIN_HEIGHT],
+    outputRange: [H_MAX_HEIGHT, H_MIN_HEIGHT],
     extrapolate: 'clamp'
   })
-
+  
   const imageScaleHeight = scrollOffsetY.interpolate({
     inputRange: [0, 150],
     outputRange: [80, 34],
@@ -28,7 +28,7 @@ const App = () => {
   })
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1  }}>
       <StatusBar backgroundColor={"#121212"} barStyle="light-content" translucent={false} />
       
       <Animated.View
@@ -76,7 +76,7 @@ const App = () => {
         scrollEventThrottle={16}
       />
 
-    </View>
+    </SafeAreaView>
   )
 }
 
